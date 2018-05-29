@@ -15,7 +15,7 @@ contract CampaignFactory {
     
     /* Returns de la lista completa de todas las campañas */
     /* view, significa que esta funcion no se ningun cambio de información, cambio de data */
-    function getDeployCampaings() public view returns (address[]){
+    function getDeployedCampaigns() public view returns (address[]){
         return deployedCampaigns;
     }
 }
