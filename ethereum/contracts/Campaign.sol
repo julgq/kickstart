@@ -111,7 +111,6 @@ contract Campaign {
     function approveRequest(uint index) public {
         
         /* 
-        
         Para no hacer busquedas frecuentes al mapping, 
         generamos una instancia tipo storage del Request en funcion
         

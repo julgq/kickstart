@@ -90,6 +90,7 @@ describe('Campaigns', () => {
         }
     });
 
+    /* Permitir que un manager genere un request de pago */
     it('allows a manager to make a payment request', async () => {
 
         await campaign.methods
@@ -106,32 +107,40 @@ describe('Campaigns', () => {
 
     });
 
+    
     it('processes requests', async () => {
         
+        /* El donador envia dinero a la camapaña  */ 
         await campaign.methods.contribute().send({
             from: accounts[0],
             value: web3.utils.toWei('10', 'ether')
         });
 
+        /* El manager genera un request para enviar dinero a un proveedor */
         await campaign.methods
         .createRequest('A', web3.utils.toWei('5', 'ether'), accounts[1])
         .send({ from: accounts[0], gas:'1000000'});
 
+        /* Se genera un voto del request, y se pasa el indice del request en funcion */
         await campaign.methods.approveRequest(0).send({
             from: accounts[0],
             gas: '1000000'
         });
 
+        /* Se valida el numero de votos y se finaliza con el request */ 
         await campaign.methods.finalizeRequest(0).send({
             from: accounts[0],
             gas: '1000000'
         });
 
+        /* Se obtiene el balance de la wallet  */
         let balance = await web3.eth.getBalance(accounts[1]);
         balance = web3.utils.fromWei(balance, 'ether');
 
         balance = parseFloat(balance);
         console.log(balance);
+
+        /* Validar si el balance es mayor a 104 */
         assert(balance > 104 );
 
     });
