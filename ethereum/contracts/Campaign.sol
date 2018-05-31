@@ -1,7 +1,5 @@
 pragma solidity ^0.4.17;
 
-
-
 contract CampaignFactory {
     /* Array de direcciones de contratos hechos deploy */
     address[] public deployedCampaigns;
@@ -19,7 +17,7 @@ contract CampaignFactory {
         return deployedCampaigns;
     }
 }
-contract Campaign {
+contract Campaign   {
     
     struct Request {
         
@@ -65,7 +63,7 @@ contract Campaign {
     }
     
     /* Funcion constructora */
-    constructor(uint minimum, address creator) public {
+    constructor(uint minimum, address creator) public payable {
         
         /* Quien es el creador del contrato */
         /* manager = msg.sender; */
