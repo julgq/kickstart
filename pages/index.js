@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, Button } from 'semantic-ui-react';
 import factory from '../ethereum/factory';
 import Layout from '../components/layout';
-
+import { Link } from '../routes';
 
 class CampaignIndex extends Component {
     /* getInitioalProps(), para renderizar desde el servidor Next.js */
@@ -31,12 +31,18 @@ class CampaignIndex extends Component {
         <Layout> 
             <div>
                 <h3>Open Campaigns</h3>
-                <Button
-                floated="right"
-                content="Create Campaign"
-                icon="add circle"
-                primary
-                />
+                    
+                    <Link route="/campaigns/new">
+                    <a>
+                        <Button
+                        floated="right"
+                        content="Create Campaign"
+                        icon="add circle"
+                        primary
+                        />
+                    </a>
+                    </Link>
+
 
                 {this.renderCampaigns()}
             </div>
