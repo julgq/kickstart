@@ -147,8 +147,23 @@ contract Campaign   {
         request.complete = true;
         
         
-        
-        
+    }
+    /* Obtenemos un resumen de nuestra campaña */
+    function getSummary() public view returns (
+        uint, uint, uint, uint, address
+    ) {
+        return (
+            minimumContribution,
+            this.balance,
+            requests.length,
+            approversCount,
+            manager
+        );
+    }
+
+    /* Obtenemos el numero de request que se han hecho */
+    function getRequestCount() public view returns (uint) {
+        return requests.length;
     }
 }
 
