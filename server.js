@@ -9,7 +9,7 @@ const routes = require('./routes');
 const handler = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
-  createServer(handler).listen(3003, err => {
+  createServer(handler).listen(3004, err => {
     if (err) throw err;
     console.log('Ready on localhost:3000');
   });
