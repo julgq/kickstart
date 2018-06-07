@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
-import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../components/layout';
-import web3 from '../../ethereum/web3';
-import { Link } from '../../routes';
+import Campaign from '../../ethereum/campaign';
 
 class CampaignShow extends Component {
+    /* Obtenemos el address desde la url */
+    static async getInitialProps(props) {
+        console.log(props.query.address);
+        const campaign = Campaign(props.query.address);
+
+        const summary = await campaign.methods.getSummary().call();
+        
+        console.log(summary);
+       
+        return {};
+    }
+
     render() {
         return (
             <Layout>
