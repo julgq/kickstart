@@ -4,7 +4,7 @@ import Layout from '../../components/layout';
 import Campaign from '../../ethereum/campaign';
 import web3 from '../../ethereum/web3';
 import ContributeForm from '../../components/ContributeForm';
-
+import { Link } from '../../routes';
 
 class CampaignShow extends Component {
     /* Obtenemos el address desde la url */
@@ -79,10 +79,16 @@ class CampaignShow extends Component {
                 <h3>Show Campaing</h3>
                 <Grid>
                     <Grid.Column width={10}>
+
                         {this.renderCards()}
+                        <Link route={`/campaigns/${this.props.address}/requests`}>
+                            <a>
+                                <Button primary>View Requests</Button>
+                            </a>
+                        </Link>
                     </Grid.Column>
                     <Grid.Column width={6}>
-                        <ContributeForm address={this.props.address}/>
+                        <ContributeForm address={this.props.address} />
                     </Grid.Column>
                 </Grid>
 
