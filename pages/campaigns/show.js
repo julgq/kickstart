@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Grid } from 'semantic-ui-react';
+import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../components/layout';
 import Campaign from '../../ethereum/campaign';
 import web3 from '../../ethereum/web3';
