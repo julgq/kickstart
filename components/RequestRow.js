@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'semantic-ui-react';
+import web3 from '../ethereum/web3';
+
 
 class RequestRow extends Component {
     render() {
@@ -10,7 +12,8 @@ class RequestRow extends Component {
             <Row>
                 <Cell>{id}</Cell>
                 <Cell>{request.description}</Cell>
-                <Cell>{request.value}</Cell>
+                <Cell>{web3.utils.fromWei(request.value, 'ether')}</Cell>
+                <Cell>{request.recipient}</Cell>
             </Row>
         );
     }
