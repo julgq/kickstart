@@ -8,9 +8,18 @@ import RequestRow from '../../../components/RequestRow';
 
 class RequestIndex extends Component {
     static async getInitialProps(props) {
+        /* address de la campaign desde la url */
         const { address } = props.query;
+
+        /* Obtenemos la campaign desde web3 */
         const campaign = Campaign(address);
+        
+        /* Cantidad total de requests que el administrador ha creado */
         const requestCount = await campaign.methods.getRequestCount().call();
+
+        /* Cantidad total de fondeadores de esta campaign */
+        const approversCount = await campaign.methods.approversCount().call();
+
 
         /* Creamos un array en base al numero de requestCount, en solidity no se puede iterar un array de Struct */
         const requests = await Promise.all(
@@ -21,16 +30,19 @@ class RequestIndex extends Component {
                 })
         );
         console.log(requests);
-        return { address, requests, requestCount };
+
+        return { address, requests, requestCount, approversCount };
     }
 
     renderRows() {
+        /* Retornamos un RequestRow por cada request que existe de la campaign */
         return this.props.requests.map((request, index) => {
             return <RequestRow
                 key={index}
                 id={index}
                 request={request}
                 address={this.props.address}
+                approversCount={this.props.approversCount}
             />;
         });
     }
@@ -43,7 +55,7 @@ class RequestIndex extends Component {
                 <h3>Requests</h3>
                 <Link route={`/campaigns/${this.props.address}/requests/new`}>
                     <a>
-                        <Button primary> Add Request </Button>
+                        <Button primary floated="right" style={{ marginBottom:10}}> Add Request </Button>
                     </a>
                 </Link>
                 <Table>
@@ -62,6 +74,10 @@ class RequestIndex extends Component {
                         {this.renderRows()}
                     </Body>
                 </Table>
+                <div>
+                    Found {this.props.requestCount} requests.
+                </div>
+                
             </Layout>
         );
     }
